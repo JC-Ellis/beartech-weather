@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Typography, CircularProgress } from '@mui/material';
+import WeatherCard from '../components/Weather-Card';
 
 function Weather() {
+  const [searchParams] = useSearchParams();
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const latitude = 55.05;
-  const longitude = -1.45;
+  const latitude = parseFloat(searchParams.get('lat')) || 55.05;
+  const longitude = parseFloat(searchParams.get('lon')) || -1.45;
 
   useEffect(() => {
     setLoading(true);
@@ -15,7 +18,8 @@ function Weather() {
       params: {
         latitude,
         longitude,
-        hourly: 'temperature_2m',
+        hourly: 'temperature_2m,precipitation_probability,precipitation,cloud_cover',
+        timezone: 'auto'
       }
     })
     .then((response) => {
@@ -30,14 +34,17 @@ function Weather() {
   }, [latitude, longitude]);
 
   return (
-    <Container>
+    <Container className="container">
       <Typography variant="h4" gutterBottom>
         Weather Forecast
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        Location: {latitude.toFixed(2)}, {longitude.toFixed(2)}
       </Typography>
       {loading ? (
         <CircularProgress />
       ) : (
-        <pre>{JSON.stringify(weather, null, 2)}</pre>
+        <WeatherCard weather={weather} />
       )}
     </Container>
   );
