@@ -1,0 +1,33 @@
+.carousel-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 800px) {
+  .carousel-wrapper {
+    width: 50vw;
+    position: static;
+    margin: 0 auto;
+  }
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.carousel-card {
+  min-width: 150px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+}

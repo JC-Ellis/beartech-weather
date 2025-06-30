@@ -3,6 +3,7 @@ import ThermostatIcon from '@mui/icons-material/Thermostat';
 import OpacityIcon from '@mui/icons-material/Opacity';
 import CloudIcon from '@mui/icons-material/Cloud';
 import CloudRainIcon from '@mui/icons-material/Grain';
+import "./WeatherCard.css";
 
 function WeatherCard({ weather }) {
   if (!weather || !weather.hourly)
