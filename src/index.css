@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+  .logo-image,
+  .profile-image {
+    width: 45px;
+  }
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -65,4 +70,69 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+/* Header */
+.header {
+  width: 100vw;
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  padding: 1rem;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header-spacing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.logo-image,
+.profile-image {
+  width: 60px;
+  height: auto;
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.logo-image:hover {
+  box-shadow: 0 0 15px 5px var(--accent-color);
+  transform: scale(1.05);
+}
+
+.header-text {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.header-text h1 {
+  font-size: 2.4rem;
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.header-text p {
+  font-size: 1rem;
+}
+
+.sub-header {
+  font-size: medium;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  padding: 0.75rem;
+  font-size: 9px;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
