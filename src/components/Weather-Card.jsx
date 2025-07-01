@@ -1,9 +1,10 @@
 import { Card, CardContent, Typography, Tooltip } from "@mui/material";
-import ThermostatIcon from '@mui/icons-material/Thermostat';
-import OpacityIcon from '@mui/icons-material/Opacity';
-import CloudIcon from '@mui/icons-material/Cloud';
-import CloudRainIcon from '@mui/icons-material/Grain';
 import "./WeatherCard.css";
+import ThermostatIcon from "@mui/icons-material/Thermostat";
+import OpacityIcon from "@mui/icons-material/Opacity";
+import CloudIcon from "@mui/icons-material/Cloud";
+import CloudRainIcon from "@mui/icons-material/Grain";
+import getWeatherImage from "../utils/getWeatherImage";
 
 function WeatherCard({ weather }) {
   if (!weather || !weather.hourly)
@@ -17,43 +18,60 @@ function WeatherCard({ weather }) {
     cloud_cover,
   } = weather.hourly;
 
+  const now = new Date();
+  const startIndex = time.findIndex((t) => new Date(t) > now);
+  const hoursToShow = time.slice(startIndex - 1, startIndex + 11);
+
   return (
+    
     <div className="carousel-wrapper">
       <div className="carousel-container">
-        {time.slice(0, 12).map((t, i) => (
-          <Card className="carousel-card" key={t} elevation={3}>
-            <CardContent>
-              <Typography variant="subtitle2" gutterBottom>
-                {new Date(t).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </Typography>
-              <Tooltip title="Temperature">
-                <Typography variant="body2">
-                 <ThermostatIcon fontSize="medium" />{temperature_2m[i]}°C
-                </Typography>
-              </Tooltip>
+        {hoursToShow.map((t, i) => {
+          const dataIndex = startIndex + i;
+          const cloud = cloud_cover[dataIndex];
+          const rain = precipitation[dataIndex];
+          const imgSrc = `/weather-icons/${getWeatherImage(cloud, rain)}`;
 
-              <Tooltip title="Cloud cover">
-                <Typography variant="body2">
-                   <CloudIcon fontSize="medium" /> {cloud_cover[i]}%</Typography>
-              </Tooltip>
-
-              <Tooltip title="Precipitation">
-                <Typography variant="body2">
-                  <OpacityIcon fontSize="medium" /> {precipitation[i]} mm
+          return (
+            <Card className="carousel-card" key={t} elevation={3}>
+              <CardContent>
+                <img
+                  src={imgSrc}
+                  alt="weather icon"
+                  style={{ width: "80px", height: "80px" }}
+                />
+                <Typography variant="subtitle2" gutterBottom>
+                  {new Date(t).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </Typography>
-              </Tooltip>
-
-              <Tooltip title="Precipitation probability">
-                <Typography variant="body2">
-                 <CloudRainIcon fontSize="medium" /> {precipitation_probability[i]}%
-                </Typography>
-              </Tooltip>
-            </CardContent>
-          </Card>
-        ))}
+                <Tooltip title="Temperature">
+                  <Typography variant="body2">
+                    <ThermostatIcon fontSize="medium" />
+                    {temperature_2m[dataIndex]}°C
+                  </Typography>
+                </Tooltip>
+                <Tooltip title="Cloud cover">
+                  <Typography variant="body2">
+                    <CloudIcon fontSize="medium" /> {cloud}%
+                  </Typography>
+                </Tooltip>
+                <Tooltip title="Precipitation">
+                  <Typography variant="body2">
+                    <OpacityIcon fontSize="medium" /> {rain} mm
+                  </Typography>
+                </Tooltip>
+                <Tooltip title="Precipitation probability">
+                  <Typography variant="body2">
+                    <CloudRainIcon fontSize="medium" />{" "}
+                    {precipitation_probability[dataIndex]}%
+                  </Typography>
+                </Tooltip>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
