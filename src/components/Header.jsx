@@ -1,22 +1,8 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Header() {
-  const [darkMode, setDarkMode] = useState(
-    window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
-  }, [darkMode]);
-
-  const handleToggle = () => {
-    setDarkMode((prev) => !prev);
-  };
-
+export default function Header({ darkMode, handleToggle }) {
   return (
     <header className="header" id="site-header">
       <div className="header-spacing">

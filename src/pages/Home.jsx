@@ -1,4 +1,4 @@
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
@@ -10,7 +10,6 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
-import { DarkMode } from "@mui/icons-material";
 
 function LocationPicker({ onChange }) {
   useMapEvents({
@@ -29,7 +28,7 @@ function MapUpdater({ coords }) {
   return null;
 }
 
-function Home() {
+function Home({ darkMode }) {
   const navigate = useNavigate();
   const [coords, setCoords] = useState({ lat: 55.05, lng: -1.45 });
   const [address, setAddress] = useState("");
@@ -71,7 +70,7 @@ function Home() {
   return (
     <Container className="container">
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        {DarkMode ? (
+        {darkMode ? (
           <TextField
             label="Where are you going? (Enter address or postcode)"
             value={address}
@@ -81,7 +80,7 @@ function Home() {
             onKeyDown={handleKeyDown}
             sx={{
               "& .MuiInputBase-input": {
-                color: "black",
+                color: "white",
               },
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
@@ -93,6 +92,12 @@ function Home() {
                 "&.Mui-focused fieldset": {
                   borderColor: "blue",
                 },
+              },
+              "& .MuiInputLabel-root": {
+                color: "white",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "blue",
               },
             }}
             style={{ whiteSpace: "nowrap", height: "60px" }}
@@ -119,6 +124,12 @@ function Home() {
                 "&.Mui-focused fieldset": {
                   borderColor: "blue",
                 },
+              },
+              "& .MuiInputLabel-root": {
+                color: "black",
+              },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "blue",
               },
             }}
             style={{ whiteSpace: "nowrap", height: "60px" }}

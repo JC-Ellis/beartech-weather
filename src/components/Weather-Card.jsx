@@ -64,9 +64,9 @@ function WeatherCard({ weather }) {
 
   let forecastMessage = "It's going to be lovely!";
   if (maxPrecipProb > 70) {
-    forecastMessage = "You are probably going to get wet.";
+    forecastMessage = "You are going to get wet.";
   } else if (maxPrecipProb > 40) {
-    forecastMessage = "There’s a chance of rain — stay prepared!";
+    forecastMessage = "There’s a chance of rain, stay prepared!";
   } else if (avgCloud > 75) {
     forecastMessage = "It will be mostly cloudy.";
   }
