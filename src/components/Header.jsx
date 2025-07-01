@@ -26,6 +26,9 @@ export default function Header() {
           </IconButton>
         </Tooltip>
         <div className="header-text">
+          {/* <p className="sub-header">
+            Sometimes, you just want to know if it's wet
+          </p> */}
           <Link to="/" className="nav-link">
             {darkMode ? (
               <img
@@ -41,9 +44,6 @@ export default function Header() {
               />
             )}
           </Link>
-          <p className="sub-header">
-            Sometimes, you just want to know if it's wet
-          </p>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
