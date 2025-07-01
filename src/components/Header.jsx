@@ -17,13 +17,13 @@ export default function Header({ darkMode, handleToggle }) {
               <img
                 className="header-image"
                 alt="raincheck-header"
-                src="src/assets/the-raincheck-header-white.png"
+                src="assets/the-raincheck-header-white.png"
               />
             ) : (
               <img
                 className="header-image"
                 alt="raincheck-header"
-                src="src/assets/the-raincheck-header-black.png"
+                src="assets/the-raincheck-header-black.png"
               />
             )}
           </Link>

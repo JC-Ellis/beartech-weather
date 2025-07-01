@@ -12,7 +12,7 @@
 }
 
 body.dark {
-  background-image: url("src/assets/fine-rain.png");
+  background-image: url("assets/fine-rain.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -27,7 +27,7 @@ body.dark {
 }
 
 body {
-  background-image: url("src/assets/fine-rain-light.png");
+  background-image: url("assets/fine-rain-light.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
