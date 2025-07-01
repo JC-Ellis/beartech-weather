@@ -69,21 +69,23 @@ function Home() {
 
   return (
     <Container className="container">
-      <Typography variant="h6" gutterBottom>
-        Choose a location or type an address
-      </Typography>
-
-      <TextField
-        label="Address or Postcode"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        fullWidth
-        margin="normal"
-        onKeyDown={handleKeyDown}
-      />
-      <Button variant="outlined" onClick={handleGeocode}>
-        Find address
-      </Button>
+      {/* <Typography variant="h5" gutterBottom>
+        Where are you going?
+      </Typography> */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <TextField
+          label="Where are you going? (Enter address or postcode)"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          fullWidth
+          margin="normal"
+          onKeyDown={handleKeyDown}
+          style={{ whiteSpace: 'nowrap', height: '60px' }}
+        />
+        <Button onClick={handleGeocode} variant="contained" style={{ whiteSpace: 'nowrap', height: '55px' }} >
+          Find address
+        </Button>
+      </div>
 
       <MapContainer
         center={[coords.lat, coords.lng]}
@@ -101,7 +103,7 @@ function Home() {
         onClick={handleNavigate}
         style={{ marginTop: "1rem" }}
       >
-        Is it wet?
+        Are you going to get wet?
       </Button>
     </Container>
   );
