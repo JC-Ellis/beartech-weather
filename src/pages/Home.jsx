@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
+import { DarkMode } from "@mui/icons-material";
 
 function LocationPicker({ onChange }) {
   useMapEvents({
@@ -69,20 +70,65 @@ function Home() {
 
   return (
     <Container className="container">
-      {/* <Typography variant="h5" gutterBottom>
-        Where are you going?
-      </Typography> */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <TextField
-          label="Where are you going? (Enter address or postcode)"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          fullWidth
-          margin="normal"
-          onKeyDown={handleKeyDown}
-          style={{ whiteSpace: 'nowrap', height: '60px' }}
-        />
-        <Button onClick={handleGeocode} variant="contained" style={{ whiteSpace: 'nowrap', height: '55px' }} >
+      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        {DarkMode ? (
+          <TextField
+            label="Where are you going? (Enter address or postcode)"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            fullWidth
+            margin="normal"
+            onKeyDown={handleKeyDown}
+            sx={{
+              "& .MuiInputBase-input": {
+                color: "black",
+              },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "grey",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "blue",
+                },
+              },
+            }}
+            style={{ whiteSpace: "nowrap", height: "60px" }}
+          />
+        ) : (
+          <TextField
+            label="Where are you going? (Enter address or postcode)"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            fullWidth
+            margin="normal"
+            onKeyDown={handleKeyDown}
+            sx={{
+              "& .MuiInputBase-input": {
+                color: "black",
+              },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "blue",
+                },
+                "&:hover fieldset": {
+                  borderColor: "black",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "blue",
+                },
+              },
+            }}
+            style={{ whiteSpace: "nowrap", height: "60px" }}
+          />
+        )}
+        <Button
+          onClick={handleGeocode}
+          variant="contained"
+          style={{ whiteSpace: "nowrap", height: "55px" }}
+        >
           Find address
         </Button>
       </div>
@@ -97,7 +143,6 @@ function Home() {
         <LocationPicker onChange={(latlng) => setCoords(latlng)} />
         <MapUpdater coords={coords} />
       </MapContainer>
-
       <Button
         variant="contained"
         onClick={handleNavigate}

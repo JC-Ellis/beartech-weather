@@ -46,3 +46,29 @@
   border: 1px solid #50abcf;
   cursor: pointer;
 }
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.summary-card img {
+  width: 80px;
+  height: 80px;
+  margin: 0 1rem;
+}
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.summary-stat {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+}

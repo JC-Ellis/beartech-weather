@@ -28,7 +28,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
-  /* opacity: 0.3; */
   margin: 0;
   font-family: var(--font-main);
   background-color: var(--bg-color);
@@ -140,7 +139,7 @@ button:hover {
 .header {
   background: linear-gradient(
     to bottom,
-    var(--header-footer-bg) 30%,
+    var(--header-footer-bg) 50%,
     rgba(0, 0, 0, 0) 100%
   );
 }

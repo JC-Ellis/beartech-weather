@@ -6,6 +6,7 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import CloudRainIcon from "@mui/icons-material/Grain";
 import getWeatherImage from "../utils/getWeatherImage";
 import "./WeatherCard.css";
+import WeatherSummaryCard from "./WeatherSummaryCard";
 
 function WeatherCard({ weather }) {
   if (!weather || !weather.hourly) {
@@ -19,6 +20,7 @@ function WeatherCard({ weather }) {
     precipitation,
     cloud_cover,
   } = weather.hourly;
+
   const [selectedDate, setSelectedDate] = useState(null);
   const now = new Date();
 
@@ -42,9 +44,46 @@ function WeatherCard({ weather }) {
     hoursToShow = time.slice(startIndex, startIndex + 24);
   }
 
+  if (startIndex === -1) {
+    return <Typography>No future weather data available.</Typography>;
+  }
+
+  const temps = temperature_2m.slice(startIndex, startIndex + 8);
+  const precs = precipitation.slice(startIndex, startIndex + 8);
+  const precProbs = precipitation_probability.slice(startIndex, startIndex + 8);
+  const clouds = cloud_cover.slice(startIndex, startIndex + 8);
+
+  const maxTemp = Math.max(...temps);
+  const minTemp = Math.min(...temps);
+  const maxPrecipProb = Math.max(...precProbs);
+  const totalPrecip = precs.reduce((a, b) => a + b, 0);
+  const avgCloud = clouds.reduce((a, b) => a + b, 0) / clouds.length;
+  const avgRain = totalPrecip / precs.length;
+
+  const summaryImg = `/weather-icons/${getWeatherImage(avgCloud, avgRain)}`;
+
+  let forecastMessage = "It's going to be lovely!";
+  if (maxPrecipProb > 70) {
+    forecastMessage = "You are probably going to get wet.";
+  } else if (maxPrecipProb > 40) {
+    forecastMessage = "There’s a chance of rain — stay prepared!";
+  } else if (avgCloud > 75) {
+    forecastMessage = "It will be mostly cloudy.";
+  }
+
   return (
     <>
       <div className="carousel-wrapper">
+        <WeatherSummaryCard
+          summaryImg={summaryImg}
+          forecastMessage={forecastMessage}
+          maxTemp={maxTemp}
+          minTemp={minTemp}
+          maxPrecipProb={maxPrecipProb}
+          totalPrecip={totalPrecip}
+          avgCloud={avgCloud}
+        />
+
         <div className="carousel-container">
           {hoursToShow.map((t, i) => {
             const dataIndex = startIndex + i;
@@ -96,7 +135,16 @@ function WeatherCard({ weather }) {
           })}
         </div>
 
-        <div className="navigation-bar">
+        <div
+          className="navigation-bar"
+          style={{
+            marginTop: "1rem",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+            justifyContent: "center",
+          }}
+        >
           {[...Array(7)].map((_, i) => {
             const date = new Date();
             date.setDate(now.getDate() + i);
@@ -112,8 +160,13 @@ function WeatherCard({ weather }) {
                 key={dateStr}
                 onClick={() => setSelectedDate(dateStr)}
                 style={{
+                  padding: "0.5rem 1rem",
+                  borderRadius: "4px",
+                  border: "1px solid #ccc",
                   backgroundColor:
                     selectedDate === dateStr ? "#3399FFDE" : "grey",
+                  color: "white",
+                  cursor: "pointer",
                 }}
               >
                 {label}

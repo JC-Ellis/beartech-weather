@@ -26,9 +26,6 @@ export default function Header() {
           </IconButton>
         </Tooltip>
         <div className="header-text">
-          {/* <p className="sub-header">
-            Sometimes, you just want to know if it's wet
-          </p> */}
           <Link to="/" className="nav-link">
             {darkMode ? (
               <img
