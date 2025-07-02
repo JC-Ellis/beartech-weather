@@ -1,12 +1,51 @@
-# React + Vite
+# The Rain Check Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Rain Check is a React-based web app that helps you check the weather for any location.  
+It uses OpenStreetMap for geocoding and Open-Meteo for weather forecasts.
 
-Currently, two official plugins are available:
+**Live demo:** [theraincheck.netlify.app](https://theraincheck.netlify.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Search by address or postcode
+- Click on the map to pick a location
+- See if you're going to get wet with weather forecasts (precipitation, cloud cover, temperature)
+- Responsive UI using Material UI
+- Interactive map powered by Leaflet + React Leaflet
+- Light and Dark mode
+
+---
+
+## 🛠 Tech stack
+
+- **React 19**
+- **Vite**
+- **Material UI**
+- **React Router**
+- **React Leaflet + Leaflet**
+- **Axios**
+- **OpenStreetMap Nominatim API (geocoding)**
+- **Open-Meteo API (weather data)**
+
+---
+
+## Getting started
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Test
+
+```bash
+npm test
+```
+### Run locally
+
+```bash 
+npm run dev
+```

@@ -10,6 +10,9 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
 
 function LocationPicker({ onChange }) {
   useMapEvents({
@@ -66,6 +69,15 @@ function Home({ darkMode }) {
       handleGeocode();
     }
   };
+
+  const defaultIcon = L.icon({
+    iconUrl: markerIconPng,
+    shadowUrl: markerShadowPng,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 
   return (
     <Container className="container">
@@ -150,7 +162,7 @@ function Home({ darkMode }) {
         className="map-container"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={[coords.lat, coords.lng]} />
+        <Marker position={[coords.lat, coords.lng]} icon={defaultIcon} />
         <LocationPicker onChange={(latlng) => setCoords(latlng)} />
         <MapUpdater coords={coords} />
       </MapContainer>
