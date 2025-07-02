@@ -39,6 +39,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+html, body {
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -95,7 +99,13 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 30px 3rem 1rem;
+  padding: 30px 1rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .header-spacing {
+    padding: 30px 3rem 1rem;
+  }
 }
 
 .logo-image,
@@ -105,8 +115,8 @@ button:hover {
 }
 
 .header-image {
-  max-width: 100%;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: auto;
 }
 
